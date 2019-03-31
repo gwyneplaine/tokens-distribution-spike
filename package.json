@@ -1,0 +1,19 @@
+{
+  "name": "@gwyneplaine/design-tokens",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "node ./build.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "style-dictionary": "^2.7.0"
+  },
+  "private": true,
+  "bolt": {
+    "workspaces": [
+      "packages/*"
+    ]
+  }
+}

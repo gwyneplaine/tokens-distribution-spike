@@ -1,0 +1,19 @@
+{
+ "colors": {
+    "text": {
+      "normal": {
+        "resting": {
+          "value": "{color.neutral.N500.value}"
+        },
+        "highlight": {
+          "value": "{color.neutral.N600.value}"
+        }
+      },
+      "bold": {
+        "resting": {
+          "value": "{color.neutral.N0.value}"
+        }
+      }
+    }
+  }
+}
