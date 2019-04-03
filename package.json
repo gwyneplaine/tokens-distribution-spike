@@ -15,5 +15,9 @@
     "workspaces": [
       "packages/*"
     ]
+  },
+  "devDependencies": {
+    "globby": "^9.2.0",
+    "rimraf": "^2.6.3"
   }
 }

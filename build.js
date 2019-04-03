@@ -1,3 +1,4 @@
+const rimraf = require('rimraf');
 const StyleDictionaryPackage = require('style-dictionary');
 
 const formats = require('./config/formats');
@@ -31,7 +32,7 @@ function createFile(format, name, filter) {
 function createFiles(platform) {
   // first do a rollup of all tokens
   let files = formats[platform].map(function(format) {
-    return createFile(format, 'all')
+    return createFile(format, 'index')
   });
 
   // then, for each category, output a file in each format
@@ -86,7 +87,18 @@ const config = {
 };
 
 // START THE BUILD
-function build() {
+function clean () {
+  try {
+    console.log('DELETING FILES');
+    rimraf.sync('packages/*/![package.json]*');
+    console.log('FILES DELETED');
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
+async function build() {
+  clean();
   const StyleDictionary = StyleDictionaryPackage.extend(config);
 
   transforms.forEach(function(transform) {
