@@ -89,9 +89,7 @@ const config = {
 // START THE BUILD
 function clean () {
   try {
-    console.log('DELETING FILES');
-    rimraf.sync('packages/*/![package.json]*');
-    console.log('FILES DELETED');
+    rimraf.sync('packages/*/!(package.json)*');
   } catch (e) {
     throw new Error(e);
   }
