@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./build.js && preconstruct build",
     "changeset": "build-releases changeset",
     "release:version": "build-releases version",
     "release:publish": "build-releases publish --public"
@@ -22,6 +22,10 @@
   "devDependencies": {
     "@atlaskit/build-releases": "^3.0.3",
     "globby": "^9.2.0",
+    "preconstruct": "^0.0.54",
     "rimraf": "^2.6.3"
+  },
+  "preconstruct": {
+    "packages": ["packages/design-tokens-js"]
   }
 }
