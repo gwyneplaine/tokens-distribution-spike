@@ -1,4 +1,18 @@
-const _ = require('lodash');
+const getLeaf = (object) => {
+  const properties = Object.keys(object);
+  if (!properties) return;
+  if (properties.includes('value')) {
+    console.log('getLeaf, has value', object);
+    return object.value;
+  } else {
+    const to_ret = properties.reduce((acc, curr) => {
+      acc[curr] = getLeaf(object[curr]);
+      return acc;
+    }, {});
+    console.log('getLeaf, no has value', to_ret);
+    return to_ret;
+  };
+};
 
 const customFormats = [
   {
@@ -9,15 +23,23 @@ const customFormats = [
         'compatibleVersion':'1.0',
         'pluginVersion':'1.1'
       };
-      to_ret.colors = _.chain(dictionary.allProperties)
+      to_ret.colors = dictionary.allProperties
         .filter(function(prop) {
-          return prop.original.category === 'color';
+          return prop.attributes.category === 'color';
         })
-        .map(function(prop) {
-          return prop.value;
+        .map(function({ name, value }) {
+          return { name, value };
         })
-        .value();
+
       return JSON.stringify(to_ret, null, 2);
+    }
+  },
+  {
+    name: 'javascript/cjs',
+    formatter: function (dictionary, config) {
+      var to_ret = getLeaf(dictionary.properties);
+      console.log(to_ret);
+      return `module.exports = ${JSON.stringify(to_ret, null, 2)}`
     }
   }
 ];

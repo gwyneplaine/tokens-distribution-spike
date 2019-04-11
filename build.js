@@ -58,6 +58,11 @@ const config = {
       buildPath: buildPath,
       files: createFiles('web')
     },
+    javascript: {
+      transformGroup: 'javascript',
+      buildPath: buildPath,
+      files: createFiles('javascript'),
+    },
     general: {
       transformGroup: "custom",
       buildPath: buildPath,
@@ -73,16 +78,16 @@ const config = {
         }
       ]
     },
-    android: {
-      transformGroup: "android",
-      buildPath: buildPath,
-      files: [
-        {
-          destination: "android/colors.xml",
-          format: "android/colors"
-        }
-      ]
-    }
+    // android: {
+    //   transformGroup: "android",
+    //   buildPath: buildPath,
+    //   files: [
+    //     {
+    //       destination: "android/colors.xml",
+    //       format: "android/colors"
+    //     }
+    //   ]
+    // }
   }
 };
 
