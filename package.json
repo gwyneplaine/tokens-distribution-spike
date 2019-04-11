@@ -6,8 +6,8 @@
   "scripts": {
     "build": "node ./build.js",
     "changeset": "build-releases changeset",
-    "version": "build-releases version",
-    "publish": "build-releases publish"
+    "release:version": "build-releases version",
+    "release:publish": "build-releases publish"
   },
   "dependencies": {
     "lodash": "^4.17.11",
