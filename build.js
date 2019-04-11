@@ -73,7 +73,7 @@ const config = {
       buildPath: buildPath,
       files: [
         {
-          destination: "sketch/palette.json",
+          destination: "design-tokens-sketch/palette.json",
           format: "sketch-palette"
         }
       ]
