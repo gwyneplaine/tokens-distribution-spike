@@ -2,7 +2,7 @@
   "name": "@gwyneplaine/design-tokens-less",
   "version": "0.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "index.less",
   "author": "",
   "license": "ISC"
 }

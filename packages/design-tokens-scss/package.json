@@ -2,7 +2,7 @@
   "name": "@gwyneplaine/design-tokens-scss",
   "version": "0.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "index.scss",
   "author": "",
   "license": "ISC"
 }
