@@ -3,15 +3,15 @@
     "text": {
       "normal": {
         "resting": {
-          "value": "{color.neutral.N500.value}"
+          "value": "{color.N500.value}"
         },
         "highlight": {
-          "value": "{color.neutral.N600.value}"
+          "value": "{color.N600.value}"
         }
       },
       "bold": {
         "resting": {
-          "value": "{color.neutral.N0.value}"
+          "value": "{color.N0.value}"
         }
       }
     }

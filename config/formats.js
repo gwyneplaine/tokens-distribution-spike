@@ -15,9 +15,11 @@ const formats = {
       format: 'scss/variables',
       extension: '.scss'
     },
+  ],
+  javascript: [
     {
       path: 'js/module/',
-      format: 'javascript/module',
+      format: 'javascript/cjs',
       extension: '.js'
     },
     {
