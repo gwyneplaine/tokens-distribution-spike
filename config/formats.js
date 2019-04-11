@@ -18,7 +18,7 @@ const formats = {
   ],
   javascript: [
     {
-      path: 'js/module/',
+      path: 'js/cjs/',
       format: 'javascript/cjs',
       extension: '.js'
     },
