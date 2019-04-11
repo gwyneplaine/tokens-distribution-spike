@@ -7,7 +7,6 @@ const actions = [{
     do: function (dictionary, config) {
         const propertyKeys = Object.keys(dictionary.properties);
         const destinationPath = path.resolve(__dirname, `../${config.buildPath}`, 'design-tokens-js');
-        console.log(destinationPath);
         propertyKeys.forEach(key => {
             rimraf.sync(`${destinationPath}/${key}`);
             const data = {

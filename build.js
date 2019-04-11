@@ -108,7 +108,6 @@ function build() {
   const StyleDictionary = StyleDictionaryPackage.extend(config);
 
   actions.forEach(function (action) {
-    console.log(action);
     StyleDictionary.registerAction(action);
   });
   
