@@ -7,7 +7,7 @@
     "build": "node ./build.js",
     "changeset": "build-releases changeset",
     "release:version": "build-releases version",
-    "release:publish": "build-releases publish"
+    "release:publish": "build-releases publish --public"
   },
   "dependencies": {
     "lodash": "^4.17.11",
