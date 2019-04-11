@@ -5,7 +5,8 @@ const getLeaf = (object) => {
     return object.value;
   } else {
     const to_ret = properties.reduce((acc, curr) => {
-      acc[curr] = getLeaf(object[curr]);
+      const key = curr.replace('.', '');
+      acc[key] = getLeaf(object[curr]);
       return acc;
     }, {});
     return to_ret;
