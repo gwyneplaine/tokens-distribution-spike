@@ -26,7 +26,6 @@
     "rimraf": "^2.6.3"
   },
   "preconstruct": {
-    "packages": ["packages/design-tokens-js"],
-    "entrypoints": ["./src/*"]
+    "packages": ["packages/design-tokens-js"]
   }
 }
