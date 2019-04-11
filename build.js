@@ -94,13 +94,13 @@ const config = {
 // START THE BUILD
 function clean () {
   try {
-    rimraf.sync('packages/*/!(package.json)*');
+    rimraf.sync('packages/*/!(package.json)*/!(package.json)*');
   } catch (e) {
     throw new Error(e);
   }
 }
 
-async function build() {
+function build() {
   clean();
   const StyleDictionary = StyleDictionaryPackage.extend(config);
 
