@@ -1,8 +1,8 @@
 {
-  "name": "@gwyneplaine/design-tokens-js",
+  "name": "@gwyneplaine/design-tokens-sketch",
   "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "palette.json",
   "author": "",
   "license": "ISC"
 }
