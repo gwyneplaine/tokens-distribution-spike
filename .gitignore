@@ -3,4 +3,3 @@ node_modules/
 packages/*/*
 
 !packages/*/package.json
-!packages/*/*/package.json
