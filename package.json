@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./build.js && preconstruct build",
     "changeset": "build-releases changeset",
     "release:version": "build-releases version",
     "release:publish": "build-releases publish --public"

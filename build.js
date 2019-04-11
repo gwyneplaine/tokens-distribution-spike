@@ -1,6 +1,7 @@
 const rimraf = require('rimraf');
 const StyleDictionaryPackage = require('style-dictionary');
 
+const actions = require('./config/actions');
 const formats = require('./config/formats');
 const transforms = require('./config/transforms').transforms;
 const transformGroups = require('./config/transforms').transformGroups;
@@ -61,6 +62,7 @@ const config = {
     javascript: {
       transformGroup: 'javascript',
       buildPath: buildPath,
+      actions: ['setup_entrypoints'],
       files: createFiles('javascript'),
     },
     general: {
@@ -102,8 +104,14 @@ function clean () {
 
 function build() {
   clean();
+  
   const StyleDictionary = StyleDictionaryPackage.extend(config);
 
+  actions.forEach(function (action) {
+    console.log(action);
+    StyleDictionary.registerAction(action);
+  });
+  
   transforms.forEach(function(transform) {
     StyleDictionary.registerTransform(transform);
   })
@@ -114,7 +122,7 @@ function build() {
 
   customFormats.forEach(function(format) {
     StyleDictionary.registerFormat(format);
-  })
+  });  
 
   // StyleDictionary.cleanAllPlatforms();
   StyleDictionary.buildAllPlatforms();
