@@ -18,17 +18,7 @@ const formats = {
   ],
   javascript: [
     {
-      path: 'js/cjs/',
-      format: 'javascript/cjs',
-      extension: '.js'
-    },
-    {
-      path: 'js/object/',
-      format: 'javascript/object',
-      extension: '.js'
-    },
-    {
-      path: 'js/es6/',
+      path: 'js/src/',
       format: 'javascript/es6',
       extension: '.js'
     }

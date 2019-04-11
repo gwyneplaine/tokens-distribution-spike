@@ -22,6 +22,11 @@
   "devDependencies": {
     "@atlaskit/build-releases": "^3.0.3",
     "globby": "^9.2.0",
+    "preconstruct": "^0.0.54",
     "rimraf": "^2.6.3"
+  },
+  "preconstruct": {
+    "packages": ["packages/design-tokens-js"],
+    "entrypoints": ["./src/*"]
   }
 }
