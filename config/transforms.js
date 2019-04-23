@@ -7,13 +7,27 @@ const getPropertyKeys = (prop) => {
 
 const transforms = [
   {
-    name: 'category',
+    name: 'attribute/category',
     type: 'attribute',
-    transformer: function(prop) {
+    transformer: function (prop) {
       // get the top level and assign that as the property's category
       // used to filter and output files by category
-      let category = prop.path[0];
-      return { category: category }
+      let attributes = {};
+      if (prop.path.length > 2) {
+        attributes.subcategory = prop.path[1];
+      }
+      attributes.category = prop.path[0];
+      return attributes;
+    }
+  },
+  {
+    name: 'attribute/compound',
+    type: 'attribute',
+    transformer: function (prop) {
+      if (typeof prop.original.value === 'object') {
+        return { compound: true }
+      }
+      return { compound: false };
     }
   },
   {
@@ -40,14 +54,23 @@ const transforms = [
 
 
 // in order to use a transform it must be added to a group and applied in the config per platform
+const base = [
+  'attribute/category',
+  'attribute/compound'
+];
+
 const transformGroups = [
   {
     name: 'custom',
-    transforms: ['category', 'name/ti/snake']
+    transforms: [...base, 'name/ti/snake']
   },
   {
     name: 'javascript',
-    transforms: ['category', 'name/ti/camel']
+    transforms: [...base, 'name/ti/camel']
+  },
+  {
+    name: 'docs',
+    transforms: [...base, 'name/ti/snake']
   }
 ];
 
