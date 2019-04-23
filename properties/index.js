@@ -1,1 +1,1 @@
-module.exports = Object.assign(require('./options'));
+module.exports = require('./options');

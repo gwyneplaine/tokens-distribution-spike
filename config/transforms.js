@@ -7,13 +7,60 @@ const getPropertyKeys = (prop) => {
 
 const transforms = [
   {
-    name: 'category',
+    name: 'attribute/category',
     type: 'attribute',
-    transformer: function(prop) {
+    transformer: function (prop) {
       // get the top level and assign that as the property's category
       // used to filter and output files by category
-      let category = prop.path[0];
-      return { category: category }
+      let attributes = {};
+      if (prop.path.length > 2) {
+        attributes.subcategory = prop.path[1];
+      }
+      attributes.category = prop.path[0];
+      return attributes;
+    }
+  },
+  {
+    name: 'attribute/compound',
+    type: 'attribute',
+    transformer: function (prop) {
+      if (typeof prop.original.value === 'object') {
+        return { compound: true }
+      }
+      return { compound: false };
+    }
+  },
+  {
+    name: 'compound/elevation',
+    type: 'value',
+    matcher: (prop) => prop.path.includes('elevation'),
+    transformer: function (prop) {
+      let shadows = `box-shadow: `
+      prop.original.value.forEach(function(shadow, i) {
+        shadows += `${shadow.offset.x} ${shadow.offset.y} ${shadow.blur} ${shadow.spread} ${shadow.color.value}`;
+        if (i !== prop.original.value.length - 1) {
+          shadows += `, `;
+        } else {
+          shadows += `;`;
+        }
+      })
+      return shadows;
+    }
+  },
+  {
+    name: 'compound/font-family',
+    type: 'value',
+    matcher: (prop) => {
+      const path = ['typography', 'font', 'family'];
+      for (let i = 0; i < path.length; i++) {
+        if (prop.path[i] !== path[i]) {
+          return false;
+        }
+      }
+      return true;
+    },
+    transformer: (prop) => {
+      return prop.original.value;
     }
   },
   {
@@ -40,14 +87,23 @@ const transforms = [
 
 
 // in order to use a transform it must be added to a group and applied in the config per platform
+const base = [
+  'attribute/category',
+  'attribute/compound'
+];
+
 const transformGroups = [
   {
     name: 'custom',
-    transforms: ['category', 'name/ti/snake']
+    transforms: [...base, 'name/ti/snake']
   },
   {
     name: 'javascript',
-    transforms: ['category', 'name/ti/camel']
+    transforms: [...base, 'compound/elevation', 'compound/font-family', 'name/ti/camel']
+  },
+  {
+    name: 'docs',
+    transforms: [...base, 'compound/elevation', 'compound/font-family', 'name/ti/snake']
   }
 ];
 

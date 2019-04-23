@@ -15,9 +15,8 @@ const properties = require('./properties');
 
 // outputs a file configuration object
 function createFile(format, name, filter) {
-  let path = format.path;
-  let extension = format.extension;
-  let styleFormat = format.format;
+  const { path, extension, format: styleFormat } = format;
+
   let fileName = name;
   let file = {
     destination: 'design-tokens-' + path + fileName + extension,
@@ -34,17 +33,13 @@ function createFile(format, name, filter) {
 // create array of file configurations
 function createFiles(platform) {
   // first do a rollup of all tokens
-  let files = formats[platform].map(function(format) {
-    return createFile(format, 'index')
-  });
+  let files = formats[platform].map((format) => createFile(format, 'index'));
 
   // console.log(files);
 
   // then, for each category, output a file in each format
   Object.keys(properties).forEach(function(category) {
-    let filter = function(prop) {
-      return prop.attributes.category == category;
-    }
+    let filter = (prop) => prop.attributes.category == category;
 
     formats[platform].forEach(function(format) {
       files.push(createFile(format, category, filter))
@@ -58,10 +53,10 @@ const buildPath = "packages/";
 const config = {
   source: ['properties/index.js'],
   platforms: {
-    web: {
+    css: {
       transformGroup: "custom",
       buildPath: buildPath,
-      files: createFiles('web')
+      files: createFiles('css')
     },
     javascript: {
       transformGroup: 'javascript',
@@ -69,10 +64,10 @@ const config = {
       actions: ['setup_entrypoints'],
       files: createFiles('javascript'),
     },
-    general: {
+    json: {
       transformGroup: "custom",
       buildPath: buildPath,
-      files: createFiles('general')
+      files: createFiles('json')
     },
     design: {
       transformGroup: "custom",
@@ -85,7 +80,7 @@ const config = {
       ]
     },
     docs: {
-      transformGroup: 'custom',
+      transformGroup: 'docs',
       buildPath: buildPath,
       files: [
         {
