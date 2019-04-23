@@ -28,13 +28,11 @@ const transforms = [
     name: 'name/ti/camel',
     type: 'name',
     transformer: function (prop, options) {
-      console.log(prop, options);
-      
       let propertyKeys = getPropertyKeys(prop);
       if (prop.attributes.category === 'color') {
         return [options.prefix].concat(propertyKeys).join(' ');
       };
-      
+
       return camelCase([options.prefix].concat(propertyKeys).join(' '));
     }
   }

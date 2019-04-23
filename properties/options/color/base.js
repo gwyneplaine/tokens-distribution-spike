@@ -1,5 +1,5 @@
 module.exports = {
-
+// Reds
   R50: { value: '#FFEBE6' },
   R75: { value: '#FFBDAD' },
   R100: { value: '#FF8F73' },
