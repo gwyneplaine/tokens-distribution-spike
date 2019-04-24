@@ -7,9 +7,11 @@
     "build": "node ./build.js && preconstruct build",
     "changeset": "build-releases changeset",
     "release:version": "build-releases version",
-    "release:publish": "build-releases publish --public"
+    "release:publish": "build-releases publish --public",
+    "test": "jest"
   },
   "dependencies": {
+    "bolt": "^0.22.6",
     "lodash": "^4.17.11",
     "style-dictionary": "^2.7.0"
   },
@@ -22,10 +24,13 @@
   "devDependencies": {
     "@atlaskit/build-releases": "^3.0.3",
     "globby": "^9.2.0",
+    "jest": "^24.7.1",
     "preconstruct": "^0.0.54",
     "rimraf": "^2.6.3"
   },
   "preconstruct": {
-    "packages": ["packages/design-tokens-js"]
+    "packages": [
+      "packages/design-tokens-js"
+    ]
   }
 }

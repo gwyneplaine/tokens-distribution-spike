@@ -10,21 +10,19 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - run:
-          name: Install Bolt
-          command: yarn global add bolt
+      - checkout
+      - run: sudo yarn global add bolt
       - run:
           name: Install Dependencies
-          command: bolt install
+          command: bolt
       - run:
           name: Unit Tests
           command: bolt test
 deploy:
     <<: *defaults
     steps:
-      - run:
-          name: Install Bolt
-          command: yarn global add bolt
+      - checkout
+      - run: sudo yarn global add bolt
       - run:
           name: Install Dependencies
           command: bolt install --pure-lockfile
