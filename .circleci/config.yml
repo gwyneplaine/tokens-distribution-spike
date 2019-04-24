@@ -7,28 +7,46 @@ defaults: &defaults
     - image: "circleci/node:dubnium-browsers"
 
 jobs:
-  deploy:
+  test:
     <<: *defaults
     steps:
       - run:
-        name: Install Dependencies
-        command: bolt install --pure-lockfile
+          name: Install Bolt
+          command: yarn global add bolt
       - run:
-        name: Authenticate with registry
-        command: echo "//registry.npmjs.org/:_authToken:$NPM_TOKEN" > ~/repo/.npmrc
+          name: Install Dependencies
+          command: bolt install
       - run:
-        name: Version package
-        command: yarn release:version
+          name: Unit Tests
+          command: bolt test
+deploy:
+    <<: *defaults
+    steps:
       - run:
-        name: Publish package
-        command: yarn release:package
+          name: Install Bolt
+          command: yarn global add bolt
+      - run:
+          name: Install Dependencies
+          command: bolt install --pure-lockfile
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken:$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Version package
+          command: yarn release:version
+      - run:
+          name: Publish package
+          command: yarn release:package
 
 
 workflows:
   version: 2
   test-deploy:
     jobs:
+      - test
       - deploy:
+          requires:
+            - test
           filters:
             branches:
               only:
