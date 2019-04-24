@@ -1,0 +1,11 @@
+{
+  "releases": [
+    { "name": "@gwyneplaine/design-tokens-css", "type": "minor" },
+    { "name": "@gwyneplaine/design-tokens-js", "type": "minor" },
+    { "name": "@gwyneplaine/design-tokens-json", "type": "minor" },
+    { "name": "@gwyneplaine/design-tokens-less", "type": "minor" },
+    { "name": "@gwyneplaine/design-tokens-scss", "type": "minor" },
+    { "name": "@gwyneplaine/design-tokens-sketch", "type": "minor" }
+  ],
+  "dependents": []
+}
