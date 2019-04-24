@@ -1,0 +1,35 @@
+
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: "circleci/node:dubnium-browsers"
+
+jobs:
+  deploy:
+    <<: *defaults
+    steps:
+      - run:
+        name: Install Dependencies
+        command: bolt install --pure-lockfile
+      - run:
+        name: Authenticate with registry
+        command: echo "//registry.npmjs.org/:_authToken:$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+        name: Version package
+        command: yarn release:version
+      - run:
+        name: Publish package
+        command: yarn release:package
+
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
