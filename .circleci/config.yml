@@ -34,7 +34,7 @@ jobs:
           command: yarn release:version
       - run:
           name: Publish package
-          command: yarn release:package
+          command: yarn release:publish
 
 
 workflows:
