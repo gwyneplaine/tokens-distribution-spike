@@ -22,6 +22,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: source ./build-setup.sh
       - run: sudo yarn global add bolt
       - run:
           name: Install Dependencies
