@@ -80,6 +80,16 @@ const config = {
         }
       ]
     },
+    docs: {
+      transformGroup: 'custom',
+      buildPath: buildPath,
+      files: [
+        {
+          destination: "design-tokens-docs/tokens.mdx",
+          format: "docs/mdx"
+        }
+      ]
+    }
     // android: {
     //   transformGroup: "android",
     //   buildPath: buildPath,
@@ -104,13 +114,13 @@ function clean () {
 
 function build() {
   clean();
-  
+
   const StyleDictionary = StyleDictionaryPackage.extend(config);
 
   actions.forEach(function (action) {
     StyleDictionary.registerAction(action);
   });
-  
+
   transforms.forEach(function(transform) {
     StyleDictionary.registerTransform(transform);
   })
@@ -121,7 +131,7 @@ function build() {
 
   customFormats.forEach(function(format) {
     StyleDictionary.registerFormat(format);
-  });  
+  });
 
   // StyleDictionary.cleanAllPlatforms();
   StyleDictionary.buildAllPlatforms();

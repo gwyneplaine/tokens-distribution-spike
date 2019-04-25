@@ -13,6 +13,45 @@ const getLeaf = (object) => {
   };
 };
 
+function MDX(dictionary, str) {
+  const topLevels = Object.entries(dictionary.properties);
+
+  function MDXContent(dictionary, level) {
+    const category = dictionary[0];
+
+    let isToken = dictionary[1].value;
+
+    if (isToken) {
+      str += `\n| ${dictionary[0]} | ${dictionary[1].value} |`;
+    } else {
+      const subdictionary = Object.entries(dictionary[1]);
+      const hasProperties = subdictionary.every(function(item) {
+        return item[1].value;
+      })
+
+      const heading = `#`.repeat(level);
+      str += `\n#${heading} ${category}`;
+
+      if (hasProperties) {
+        str += `\n| Name | Value |\n| ---- | ----- |`;
+      }
+
+      level++;
+      for (let i = 0; i < subdictionary.length; i++) {
+        const subdict = subdictionary[i];
+        MDXContent(subdict, level);
+      }
+    }
+  }
+
+  topLevels.forEach(function(dictionary) {
+    MDXContent(dictionary, 0);
+  });
+
+  return str;
+}
+
+
 const customFormats = [
   {
     name: 'sketch-palette',
@@ -38,6 +77,12 @@ const customFormats = [
     formatter: function (dictionary, config) {
       var to_ret = getLeaf(dictionary.properties);
       return `module.exports = ${JSON.stringify(to_ret, null, 2)}`
+    }
+  },
+  {
+    name: 'docs/mdx',
+    formatter: function(dictionary, config) {
+      return MDX(dictionary, '');
     }
   }
 ];
