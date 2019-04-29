@@ -1,3 +1,5 @@
+const startCase = require('lodash/startCase');
+
 const getLeaf = (object) => {
   const properties = Object.keys(object);
   if (!properties) return;
@@ -13,10 +15,11 @@ const getLeaf = (object) => {
   };
 };
 
-function MDX(dictionary, str) {
+function MDX(dictionary) {
   const topLevels = Object.entries(dictionary.properties);
+  let str = ``;
 
-  function MDXContent(dictionary, level) {
+  function MDXContent(dictionary, level, first) {
     const category = dictionary[0];
 
     let isToken = dictionary[1].value;
@@ -30,7 +33,8 @@ function MDX(dictionary, str) {
       })
 
       const heading = `#`.repeat(level);
-      str += `\n#${heading} ${category}`;
+      const spacing = `${first ? `` : level === 0 ? `\n\n` : `\n`}`;
+      str += `${spacing}#${heading} ${startCase(category)}`;
 
       if (hasProperties) {
         str += `\n| Name | Value |\n| ---- | ----- |`;
@@ -39,13 +43,17 @@ function MDX(dictionary, str) {
       level++;
       for (let i = 0; i < subdictionary.length; i++) {
         const subdict = subdictionary[i];
-        MDXContent(subdict, level);
+        MDXContent(subdict, level, false);
       }
     }
   }
 
-  topLevels.forEach(function(dictionary) {
-    MDXContent(dictionary, 0);
+  topLevels.forEach(function(dictionary, i) {
+    if (i === 0) {
+      MDXContent(dictionary, 0, true);
+    } else {
+      MDXContent(dictionary, 0, false);
+    }
   });
 
   return str;
@@ -82,7 +90,7 @@ const customFormats = [
   {
     name: 'docs/mdx',
     formatter: function(dictionary, config) {
-      return MDX(dictionary, '');
+      return MDX(dictionary);
     }
   }
 ];
