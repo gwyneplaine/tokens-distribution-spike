@@ -1,0 +1,8 @@
+{
+  "name": "@gwyneplaine/design-tokens-docs",
+  "version": "0.1.0",
+  "description": "",
+  "main": "tokens.mdx",
+  "author": "",
+  "license": "ISC"
+}
