@@ -22,14 +22,14 @@ function MDX(dictionary) {
   function MDXContent(dictionary, level, first) {
     const category = dictionary[0];
 
-    let isToken = dictionary[1].value;
+    let isToken = dictionary[1].hasOwnProperty("value");
 
     if (isToken) {
       str += `\n| ${dictionary[0]} | ${dictionary[1].value} |`;
     } else {
       const subdictionary = Object.entries(dictionary[1]);
       const hasProperties = subdictionary.every(function(item) {
-        return item[1].value;
+        return item[1].hasOwnProperty("value");
       })
 
       const heading = `#`.repeat(level);
