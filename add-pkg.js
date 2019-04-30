@@ -7,23 +7,49 @@ const inquirer = require('inquirer');
 
 async function run () {
   const namespace = "@gwyneplaine";
-  let [pkg, format] = process.argv.splice(2);
-  let folderPath = path.resolve(__dirname, `packages/${pkg}`);
+
+  const pkgName = await inquirer.prompt([{
+    message: "First, what is the name of your new package?",
+    name: 'pkgName',
+    validate: input => input.length > 0
+  }]).then(responses => {
+    return responses.pkgName
+  });
+
+  const entryPoint = await inquirer.prompt([{
+    message: "Next, please the entrypoint for your package? (i.e. index.js)",
+    name: 'entryPoint',
+    validate: input => input.length > 0
+  }]).then(responses => responses.entryPoint);
+
+  const packageConfig = await inquirer.prompt([{
+    message: 'Please specify your package manager (npm is the default)',
+    name: 'packageManager',
+  }]).then(({ packageManager }) => {
+    switch (packageManager.toLowerCase()) {
+      case 'npm':
+      default:
+        return 'package.json'
+    }
+  });
+
+  let folderPath = path.resolve(__dirname, `packages/${pkgName}`);
+
   try {
     if (fs.existsSync(folderPath)) {
-      throw Error(`Could not create ${pkg}. \nFolder already exists in ${folderPath}`);
+      throw Error(`Could not create ${pkgName}. \nFolder already exists in ${folderPath}`);
     }
 
     let packageJSON = JSON.stringify({
-      name: `${namespace}/${pkg}`,
+      name: `${namespace}/${pkgName}`,
       version: "0.0.1",
-      main: `index.${format}`,
+      main: entryPoint,
       license: "ISC",
       author: "Atlassian",
     }, "utf-8", 2);
 
     fs.mkdirSync(`${folderPath}`);
-    fs.writeFileSync(`${folderPath}/package.json`, packageJSON);
+    fs.writeFileSync(`${folderPath}/${packageConfig}`, packageJSON);
   } catch (e) {
     console.error(chalk.red(e));
   }
