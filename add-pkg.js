@@ -42,7 +42,7 @@ async function run () {
 
     let packageJSON = JSON.stringify({
       name: `${namespace}/${pkgName}`,
-      version: "0.0.1",
+      version: "0.0.0",
       main: entryPoint,
       license: "ISC",
       author: "Atlassian",
