@@ -27,6 +27,7 @@ async function run () {
     name: 'packageManager',
   }]).then(({ packageManager }) => {
     switch (packageManager.toLowerCase()) {
+      // TODO Add cocoapods support
       case 'npm':
       default:
         return 'package.json'
