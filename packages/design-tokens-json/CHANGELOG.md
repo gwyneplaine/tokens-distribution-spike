@@ -1,5 +1,10 @@
 # @gwyneplaine/design-tokens-json
 
+## 0.3.1
+- [patch] 71719d9:
+
+  - namespace change
+
 ## 0.3.0
 - [minor] f1a6ce4:
 
