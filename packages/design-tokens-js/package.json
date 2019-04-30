@@ -1,5 +1,5 @@
 {
-  "name": "@gwyneplaine/design-tokens-js",
+  "name": "@dstokens/design-tokens-js",
   "version": "0.3.0",
   "description": "",
   "main": "dist/design-tokens-js.cjs.js",

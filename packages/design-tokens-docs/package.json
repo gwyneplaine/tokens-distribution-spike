@@ -1,5 +1,5 @@
 {
-  "name": "@gwyneplaine/design-tokens-docs",
+  "name": "@dstokens/design-tokens-docs",
   "version": "0.1.0",
   "description": "",
   "main": "tokens.mdx",
