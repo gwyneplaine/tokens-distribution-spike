@@ -8,9 +8,12 @@
     "changeset": "build-releases changeset",
     "release:version": "build-releases version",
     "release:publish": "build-releases publish --public",
-    "test": "jest"
+    "test": "jest",
+    "add:package": "node ./add-pkg.js"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
+    "inquirer": "^6.3.1",
     "lodash": "^4.17.11",
     "style-dictionary": "^2.7.0"
   },
