@@ -50,5 +50,5 @@ To understand how to add new formats to the build process, please see the [Using
 Style-dictionary has a robust list of internally supported formats, so it might be worthwhile to check out these formats as the work may already have been done for you!
 [Learn more about style-dictionary formats here](https://amzn.github.io/style-dictionary/#/formats?id=pre-defined-formats).
 
-Should pre-defined formats not exist for your use case, you'll need to create and register a custom formatter, this should be done in the customFormats.js file.
-To find out more about declaring custom formats, see the [custom formats](https://amzn.github.io/style-dictionary/#/formats?id=creating-formats) section of the style-dictionary docs. 
+Should pre-defined formats not exist for your use case, you'll need to create and register a custom formatter, this should be done in the customFormats.js file. Please submit a ticket for our [Jira board](https://product-fabric.atlassian.net/jira/software/projects/DTOK/boards/371) to track this work.
+To find out more about declaring custom formats, see the [custom formats](https://amzn.github.io/style-dictionary/#/formats?id=creating-formats) section of the style-dictionary docs.
