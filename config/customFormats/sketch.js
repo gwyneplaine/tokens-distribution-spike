@@ -1,5 +1,4 @@
 module.exports = (dictionary, config) => {
-  console.log(dictionary, config);
   // Poly filling the sketch palette format because theirs depends on CTI
   var to_ret = {
     'compatibleVersion':'1.0',
