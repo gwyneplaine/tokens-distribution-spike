@@ -16,7 +16,7 @@ This will build the relevant output files to folders in the packages/ directory.
 Each output format is built into a publishable package such that consumers can:
 
 ```
-import colors from '@ds-tokens/design-tokens-css/colors';
+import colors from '@dstokens/design-tokens-css/colors';
 ```
 
 
