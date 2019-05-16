@@ -1,13 +1,8 @@
 /// SNAPSHOT TESTS
 const fs = require('fs');
-const util = require('util');
-const path = require('path');
 const globby = require('globby');
 const { execSync } = require('child_process');
 const cases = require('jest-in-case');
-const readFile = util.promisify(fs.readFile);
-// const { toMatchFile } = require('jest-file-snapshot');
-// expect.extend({ toMatchFile });
 
 const stripComments = (file) => {
   return file.replace(/\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*\/+/gi, '')
@@ -18,9 +13,7 @@ describe('on yarn build', () => {
     execSync('yarn build');
   });
   afterAll(() => {
-    console.time('CLEAN');
     rimraf.sync('packages/*/!(package.json)*/!(package.json)*');
-    console.timeEnd('CLEAN');
   });
 
   cases('output files should match snapshots', opts => {
