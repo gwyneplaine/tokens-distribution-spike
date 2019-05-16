@@ -34,6 +34,13 @@ const formats = {
       format: 'json/flat',
       extension: '.json'
     }
+  ],
+  sketch: [
+    {
+      path: 'sketch/',
+      format: 'sketch-palette',
+      extension: '.json',
+    }
   ]
 };
 
