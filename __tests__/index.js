@@ -1,10 +1,13 @@
 /// SNAPSHOT TESTS
 const fs = require('fs');
 const util = require('util');
+const path = require('path');
 const globby = require('globby');
 const { execSync } = require('child_process');
 const cases = require('jest-in-case');
 const readFile = util.promisify(fs.readFile);
+// const { toMatchFile } = require('jest-file-snapshot');
+// expect.extend({ toMatchFile });
 
 const stripComments = (file) => {
   return file.replace(/\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*\/+/gi, '')
@@ -20,15 +23,11 @@ describe('on yarn build', () => {
     console.timeEnd('CLEAN');
   });
 
-  cases('output files should match snapshots', async opts => {
-    const filePaths = await globby(opts.pattern, { ignore: ['CHANGELOG.md', 'package.json']});
-    await Promise.all(filePaths.map(async filePath => {
-      const file = await readFile(filePath, 'utf-8');
-      return file;
-    })).then(files => {
-      files.forEach(file => {
-        expect(stripComments(file)).toMatchSnapshot();
-      })
+  cases('output files should match snapshots', opts => {
+    const filePaths = globby.sync(opts.pattern, { ignore: ['CHANGELOG.md', 'package.json']});
+    filePaths.sort().forEach(filePath => {
+      const file = fs.readFileSync(filePath, 'utf-8').toString();
+      expect(stripComments(file)).toMatchSnapshot();
     });
   }, [
     { pattern: './packages/design-tokens-css/*.css', name: 'css' },

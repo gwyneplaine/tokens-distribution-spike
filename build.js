@@ -1,6 +1,5 @@
 const rimraf = require('rimraf');
 const StyleDictionaryPackage = require('style-dictionary');
-
 const actions = require('./config/actions');
 const formats = require('./config/formats');
 const transforms = require('./config/transforms').transforms;
@@ -10,6 +9,7 @@ const customFormats = require('./config/customFormats');
 // bypass style-dictionary's deep merge and let node do it
 // other example here: https://github.com/amzn/style-dictionary/tree/master/examples/advanced/node-modules-as-config-and-properties
 const properties = require('./properties');
+
 
 // outputs a file configuration object
 function createFile(format, name, filter) {

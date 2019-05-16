@@ -554,14 +554,6 @@ export const messagingColorsTextBoldResting = \\"#FFFFFF\\";"
 exports[`on yarn build output files should match snapshots js 3`] = `
 "
 
-export const messagingColorsTextNormalResting = \\"#42526E\\";
-export const messagingColorsTextNormalHighlight = \\"#344563\\";
-export const messagingColorsTextBoldResting = \\"#FFFFFF\\";"
-`;
-
-exports[`on yarn build output files should match snapshots js 4`] = `
-"
-
 export const layer100 = 100;
 export const layer300 = 300;
 export const layer200 = 200;
@@ -571,6 +563,14 @@ export const layer510 = 510;
 export const layer600 = 600;
 export const layer700 = 700;
 export const layer800 = 800;"
+`;
+
+exports[`on yarn build output files should match snapshots js 4`] = `
+"
+
+export const messagingColorsTextNormalResting = \\"#42526E\\";
+export const messagingColorsTextNormalHighlight = \\"#344563\\";
+export const messagingColorsTextBoldResting = \\"#FFFFFF\\";"
 `;
 
 exports[`on yarn build output files should match snapshots js 5`] = `
