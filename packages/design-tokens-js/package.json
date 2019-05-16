@@ -10,7 +10,6 @@
     "entrypoints": [
       ".",
       "color",
-      "messaging",
       "spacing"
     ]
   }
