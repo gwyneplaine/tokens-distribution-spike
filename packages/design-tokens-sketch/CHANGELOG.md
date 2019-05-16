@@ -1,5 +1,12 @@
 # @gwyneplaine/design-tokens-sketch
 
+## 0.4.0
+### Minor Changes
+
+- [minor] :
+
+  Remove messaging tokens
+
 ## 0.3.1
 - [patch] 71719d9:
 
