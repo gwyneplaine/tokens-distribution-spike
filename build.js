@@ -34,9 +34,12 @@ function createFile(format, name, filter) {
 // create array of file configurations
 function createFiles(platform) {
   // first do a rollup of all tokens
-  let files = formats[platform].map(function(format) {
-    return createFile(format, 'index')
-  });
+  let files = [];
+  // let files = formats[platform].map(function(format) {
+  //   return createFile(format, 'index')
+  // });
+
+  // console.log(files);
 
   // console.log(files);
 
@@ -61,12 +64,13 @@ const config = {
     web: {
       transformGroup: "custom",
       buildPath: buildPath,
+      actions: ['generate_index_files'],
       files: createFiles('web')
     },
     javascript: {
       transformGroup: 'javascript',
       buildPath: buildPath,
-      actions: ['setup_entrypoints'],
+      actions: ['generate_index_files','setup_entrypoints'],
       files: createFiles('javascript'),
     },
     general: {
