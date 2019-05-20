@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 function createReferences (fileExt, importPaths) {
   switch (fileExt) {
     case 'js':
@@ -12,9 +15,9 @@ function createReferences (fileExt, importPaths) {
 
 function prepareFiles(srcFiles) {
   return Object.entries(srcFiles).map(([key, value]) => {
-    let targetPath = `../packages/design-tokens-${key}/index.${key}`;
+    let targetPath = `../../packages/design-tokens-${key}/index.${key}`;
     if (key === 'js') {
-      targetPath = `../packages/design-tokens-js/src/index.js`;
+      targetPath = `../../packages/design-tokens-js/src/index.js`;
     }
     return {
       targetPath,
@@ -38,10 +41,14 @@ function generateIndexFiles (dictionary, config) {
     }
     return acc;
   }, {});
+  console.log(sortedImportPaths);
 
   const references = prepareFiles(sortedImportPaths).filter( i => i.file);
+  console.log(references);
   references.forEach(ref => {
     try {
+      let writePath = path.resolve(__dirname, ref.targetPath);
+      console.log(writePath)
       fs.writeFileSync(path.resolve(__dirname, ref.targetPath), ref.file);
     } catch (e) {
       throw new Error(e);
