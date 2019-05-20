@@ -252,9 +252,6 @@ exports[`on yarn build output files should match snapshots css 2`] = `
  --grid_0_25_x: 2;
  --grid_0_5_x: 4;
  --grid_1_x: 8;
- --messaging_colors_text_normal_resting: #42526E;
- --messaging_colors_text_normal_highlight: #344563;
- --messaging_colors_text_bold_resting: #FFFFFF;
 }
 "
 `;
@@ -277,17 +274,6 @@ exports[`on yarn build output files should match snapshots css 3`] = `
 `;
 
 exports[`on yarn build output files should match snapshots css 4`] = `
-"
-
-:root {
- --messaging_colors_text_normal_resting: #42526E;
- --messaging_colors_text_normal_highlight: #344563;
- --messaging_colors_text_bold_resting: #FFFFFF;
-}
-"
-`;
-
-exports[`on yarn build output files should match snapshots css 5`] = `
 "
 
 :root {
@@ -545,10 +531,7 @@ export const layer700 = 700;
 export const layer800 = 800;
 export const grid025X = 2;
 export const grid05X = 4;
-export const grid1X = 8;
-export const messagingColorsTextNormalResting = \\"#42526E\\";
-export const messagingColorsTextNormalHighlight = \\"#344563\\";
-export const messagingColorsTextBoldResting = \\"#FFFFFF\\";"
+export const grid1X = 8;"
 `;
 
 exports[`on yarn build output files should match snapshots js 3`] = `
@@ -566,14 +549,6 @@ export const layer800 = 800;"
 `;
 
 exports[`on yarn build output files should match snapshots js 4`] = `
-"
-
-export const messagingColorsTextNormalResting = \\"#42526E\\";
-export const messagingColorsTextNormalHighlight = \\"#344563\\";
-export const messagingColorsTextBoldResting = \\"#FFFFFF\\";"
-`;
-
-exports[`on yarn build output files should match snapshots js 5`] = `
 "
 
 export const grid025X = 2;
@@ -827,10 +802,7 @@ exports[`on yarn build output files should match snapshots json 2`] = `
   \\"layer_800\\": 800,
   \\"grid_0_25_x\\": 2,
   \\"grid_0_5_x\\": 4,
-  \\"grid_1_x\\": 8,
-  \\"messaging_colors_text_normal_resting\\": \\"#42526E\\",
-  \\"messaging_colors_text_normal_highlight\\": \\"#344563\\",
-  \\"messaging_colors_text_bold_resting\\": \\"#FFFFFF\\"
+  \\"grid_1_x\\": 8
 }"
 `;
 
@@ -849,14 +821,6 @@ exports[`on yarn build output files should match snapshots json 3`] = `
 `;
 
 exports[`on yarn build output files should match snapshots json 4`] = `
-"{
-  \\"messaging_colors_text_normal_resting\\": \\"#42526E\\",
-  \\"messaging_colors_text_normal_highlight\\": \\"#344563\\",
-  \\"messaging_colors_text_bold_resting\\": \\"#FFFFFF\\"
-}"
-`;
-
-exports[`on yarn build output files should match snapshots json 5`] = `
 "{
   \\"grid_0_25_x\\": 2,
   \\"grid_0_5_x\\": 4,
@@ -1111,10 +1075,7 @@ exports[`on yarn build output files should match snapshots less 2`] = `
 @layer_800: 800;
 @grid_0_25_x: 2;
 @grid_0_5_x: 4;
-@grid_1_x: 8;
-@messaging_colors_text_normal_resting: #42526E;
-@messaging_colors_text_normal_highlight: #344563;
-@messaging_colors_text_bold_resting: #FFFFFF;"
+@grid_1_x: 8;"
 `;
 
 exports[`on yarn build output files should match snapshots less 3`] = `
@@ -1132,14 +1093,6 @@ exports[`on yarn build output files should match snapshots less 3`] = `
 `;
 
 exports[`on yarn build output files should match snapshots less 4`] = `
-"
-
-@messaging_colors_text_normal_resting: #42526E;
-@messaging_colors_text_normal_highlight: #344563;
-@messaging_colors_text_bold_resting: #FFFFFF;"
-`;
-
-exports[`on yarn build output files should match snapshots less 5`] = `
 "
 
 @grid_0_25_x: 2;
@@ -1394,10 +1347,7 @@ $layer_700: 700;
 $layer_800: 800;
 $grid_0_25_x: 2;
 $grid_0_5_x: 4;
-$grid_1_x: 8;
-$messaging_colors_text_normal_resting: #42526E;
-$messaging_colors_text_normal_highlight: #344563;
-$messaging_colors_text_bold_resting: #FFFFFF;"
+$grid_1_x: 8;"
 `;
 
 exports[`on yarn build output files should match snapshots scss 3`] = `
@@ -1415,14 +1365,6 @@ $layer_800: 800;"
 `;
 
 exports[`on yarn build output files should match snapshots scss 4`] = `
-"
-
-$messaging_colors_text_normal_resting: #42526E;
-$messaging_colors_text_normal_highlight: #344563;
-$messaging_colors_text_bold_resting: #FFFFFF;"
-`;
-
-exports[`on yarn build output files should match snapshots scss 5`] = `
 "
 
 $grid_0_25_x: 2;
