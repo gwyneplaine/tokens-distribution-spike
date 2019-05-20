@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@dstokens/design-tokens-js", "type": "minor" }],
+  "dependents": []
+}
