@@ -35,7 +35,7 @@ jobs:
           command: yarn build
       - run:
           name: Version package
-          command: yarn release:version
+          command: yarn release:version --commit
       - run:
           name: Publish package
           command: yarn release:publish
