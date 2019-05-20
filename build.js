@@ -1,4 +1,6 @@
-const rimraf = require('rimraf');
+const path = require('path');
+const globby = require('globby');
+const fs = require('fs');
 const StyleDictionaryPackage = require('style-dictionary');
 const actions = require('./config/actions');
 const formats = require('./config/formats');
@@ -110,7 +112,10 @@ const config = {
 // START THE BUILD
 function clean () {
   try {
-    rimraf.sync('packages/*/!(package.json)*/!(package.json)*');
+    const files = globby.sync(path.resolve(__dirname, './packages/**'), { ignore: ['**/package.json', '**/CHANGELOG.md', '**/README.md']});
+    files.forEach(f => {
+      fs.unlinkSync(f);
+    });
   } catch (e) {
     throw new Error(e);
   }
