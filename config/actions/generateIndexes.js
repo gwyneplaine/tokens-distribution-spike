@@ -3,7 +3,11 @@ const findUp = require('find-up');
 const path = require('path');
 const mainFilePattern = 'index.';
 
-// TODO: This might be better as a map over dictionary of tagged template fns
+// This might be better as a map over dictionary of tagged template fns
+// given that switches evaluate linearly while dictionaries are logarithmic.
+// But this seems trivial, and a switch is a concise readable abstraction
+// for the amount of formats we have at the moment.
+
 function createReferences (fileExt, importPaths) {
   switch (fileExt) {
     case 'js':
@@ -17,9 +21,11 @@ function createReferences (fileExt, importPaths) {
 };
 
 // prepareFiles takes a dictionary of filePaths and returns an array of objects with:
-// a targetPath
-// file contents
+// - a targetPath
+// - file contents
 function prepareFiles(srcFiles, buildPath) {
+  // Using findup feels like a micro-optimisation,
+  // but it makes this code slightly more resilient to future directory changes.
   const workspace = findUp.sync(buildPath, { type: 'directory' });
   return Object.entries(srcFiles).map(([targetDirectory, { fileExt, importPaths }]) => {
     let targetPath = `${workspace}/${targetDirectory}/${mainFilePattern}${fileExt}`;
@@ -69,6 +75,7 @@ function generateIndexFiles (dictionary, config) {
 };
 
 function removeIndexFiles (dictionary, config) {
+  // TODO, VALIDATE WHETHER OR NOT WE NEED THIS.
   console.log(dictionary, config);
 };
 
