@@ -1,4 +1,6 @@
-const rimraf = require('rimraf');
+const path = require('path');
+const globby = require('globby');
+const fs = require('fs');
 const StyleDictionaryPackage = require('style-dictionary');
 const actions = require('./config/actions');
 const formats = require('./config/formats');
@@ -35,6 +37,8 @@ function createFiles(platform) {
   let files = formats[platform].map(function(format) {
     return createFile(format, 'index')
   });
+
+  // console.log(files);
 
   // then, for each category, output a file in each format
   Object.keys(properties).forEach(function(category) {
@@ -106,7 +110,10 @@ const config = {
 // START THE BUILD
 function clean () {
   try {
-    rimraf.sync('packages/*/!(package.json)*/!(package.json)*');
+    const files = globby.sync(path.resolve(__dirname, './packages/**'), { ignore: ['**/package.json', '**/CHANGELOG.md', '**/README.md']});
+    files.forEach(f => {
+      fs.unlinkSync(f);
+    });
   } catch (e) {
     throw new Error(e);
   }
@@ -116,7 +123,6 @@ function build() {
   clean();
 
   const StyleDictionary = StyleDictionaryPackage.extend(config);
-
   actions.forEach(function (action) {
     StyleDictionary.registerAction(action);
   });
