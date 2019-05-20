@@ -23,7 +23,7 @@ const transforms = [
   {
     name: 'attribute/compound',
     type: 'attribute',
-    transformer: function (prop) {
+    transformer: (prop) => {
       if (typeof prop.original.value === 'object') {
         return { compound: true }
       }
@@ -60,7 +60,32 @@ const transforms = [
       return true;
     },
     transformer: (prop) => {
-      return prop.original.value;
+      const val = prop.original.value;
+      const hasDefault = val.default;
+      const hasCustom = val.custom;
+      let str = `font-family: `;
+
+      if (hasDefault) {
+        val.default.forEach((font, i) => {
+          str += `${font}, `;
+        });
+      }
+
+      if (hasCustom) {
+        val.custom.forEach(font => {
+          str += `'${font}', `;
+        });
+      }
+
+      val.fallback.forEach((font, i) => {
+        if (i >= val.fallback.length-1) {
+          str += `${font};`;
+        } else {
+          str += `${font}, `;
+        }
+      });
+
+      return str;
     }
   },
   {
