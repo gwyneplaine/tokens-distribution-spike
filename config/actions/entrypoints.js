@@ -29,6 +29,7 @@ function removeEntrypoints () {
 }
 
 module.exports = {
-  setupEntrypoints,
-  removeEntrypoints,
+  name: 'setup_entrypoints',
+  do: setupEntrypoints,
+  undo: removeEntrypoints,
 }

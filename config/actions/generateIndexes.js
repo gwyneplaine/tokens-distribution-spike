@@ -13,6 +13,9 @@ function createReferences (fileExt, importPaths) {
   }
 }
 
+// prepareFiles takes a dictionary of filePaths and returns an array of objects with:
+// a targetPath
+// file contents
 function prepareFiles(srcFiles) {
   return Object.entries(srcFiles).map(([key, value]) => {
     let targetPath = `../../packages/design-tokens-${key}/index.${key}`;
@@ -28,8 +31,9 @@ function prepareFiles(srcFiles) {
 
 
 function generateIndexFiles (dictionary, config) {
-  const destinationFiles = config.files.map(f => f.destination);
-
+  // Grab destination files from style-dictionary config.
+  const destinationFiles = config.files.filter(f => !f.destination.includes('index.')).map(f => f.destination);
+  // Reduce destination files to a dictionary of arrays, with each key corresponding to an output format.
   const sortedImportPaths = destinationFiles.reduce((acc, curr) => {
     const [match] = curr.match(/\.[0-9a-z]+$/i);
     const fileExt = match.substring(1);
@@ -41,14 +45,12 @@ function generateIndexFiles (dictionary, config) {
     }
     return acc;
   }, {});
-  console.log(sortedImportPaths);
 
+  // Prep files
   const references = prepareFiles(sortedImportPaths).filter( i => i.file);
-  console.log(references);
+
   references.forEach(ref => {
     try {
-      let writePath = path.resolve(__dirname, ref.targetPath);
-      console.log(writePath)
       fs.writeFileSync(path.resolve(__dirname, ref.targetPath), ref.file);
     } catch (e) {
       throw new Error(e);
@@ -63,6 +65,7 @@ function removeIndexFiles (dictionary, config) {
 
 
 module.exports = {
-  generateIndexFiles,
-  removeIndexFiles,
+  name: 'generate_index_files',
+  do: generateIndexFiles,
+  undo: removeIndexFiles,
 }

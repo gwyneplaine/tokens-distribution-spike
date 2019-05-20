@@ -34,12 +34,9 @@ function createFile(format, name, filter) {
 // create array of file configurations
 function createFiles(platform) {
   // first do a rollup of all tokens
-  let files = [];
-  // let files = formats[platform].map(function(format) {
-  //   return createFile(format, 'index')
-  // });
-
-  // console.log(files);
+  let files = formats[platform].map(function(format) {
+    return createFile(format, 'index')
+  });
 
   // console.log(files);
 
