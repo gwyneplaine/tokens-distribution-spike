@@ -1,6 +1,11 @@
+const fs = require('fs');
+const { execSync } = require('child_process');
+const path = require('path');
+const rimraf = require('rimraf');
+
 function setupEntrypoints (dictionary, config) {
   const propertyKeys = Object.keys(dictionary.properties);
-  const destinationPath = path.resolve(__dirname, `../${config.buildPath}`, 'design-tokens-js');
+  const destinationPath = path.resolve(__dirname, `../../${config.buildPath}`, 'design-tokens-js');
   propertyKeys.forEach(key => {
     rimraf.sync(`${destinationPath}/${key}`);
     const data = {
