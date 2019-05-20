@@ -1,0 +1,12 @@
+{
+  "releases": [
+    { "name": "@dstokens/design-tokens-css", "type": "patch" },
+    { "name": "@dstokens/design-tokens-docs", "type": "patch" },
+    { "name": "@dstokens/design-tokens-js", "type": "patch" },
+    { "name": "@dstokens/design-tokens-json", "type": "patch" },
+    { "name": "@dstokens/design-tokens-less", "type": "patch" },
+    { "name": "@dstokens/design-tokens-scss", "type": "patch" },
+    { "name": "@dstokens/design-tokens-sketch", "type": "patch" }
+  ],
+  "dependents": []
+}

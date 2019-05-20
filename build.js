@@ -123,7 +123,6 @@ function build() {
   clean();
 
   const StyleDictionary = StyleDictionaryPackage.extend(config);
-  console.log(actions);
   actions.forEach(function (action) {
     StyleDictionary.registerAction(action);
   });
