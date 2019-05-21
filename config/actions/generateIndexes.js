@@ -45,16 +45,11 @@ function analyseDestinationPath(filePath) {
   return { fileExt, targetDirectory, importPath };
 }
 
-function generateIndexFiles (dictionary, config) {
-  // Grab destination files from style-dictionary config.
-  const { buildPath, files } = config;
-  const destinationFiles = files
+function generateSortedImportPaths (filePaths) {
+  return filePaths
     .map(f => f.destination)
-    .filter(f => !f.includes(mainFilePattern));
-
-  // Reduce destination files to a dictionary of arrays, with each key corresponding to an output format.
-
-  const sortedImportPaths = destinationFiles.reduce((acc, curr) => {
+    .filter(f => !f.includes(mainFilePattern))
+    .reduce((acc, curr) => {
     const { fileExt, targetDirectory, importPath } = analyseDestinationPath(curr);
     if (!acc[targetDirectory]) {
       acc[targetDirectory] = { fileExt, importPaths: [] };
@@ -62,6 +57,12 @@ function generateIndexFiles (dictionary, config) {
     acc[targetDirectory].importPaths.push(importPath);
     return acc;
   }, {});
+}
+
+function generateIndexFiles (dictionary, config) {
+  // Grab destination files from style-dictionary config.
+  const { buildPath, files } = config;
+  const sortedImportPaths = generateSortedImportPaths(files);
 
   // Prep files
   const references = prepareFiles(sortedImportPaths, buildPath).filter(i => i.file);
@@ -76,7 +77,19 @@ function generateIndexFiles (dictionary, config) {
 
 function removeIndexFiles (dictionary, config) {
   // TODO, VALIDATE WHETHER OR NOT WE NEED THIS.
-  console.log(dictionary, config);
+  const workspace = findUp.sync(config.buildPath, { type: 'directory' });
+
+  const sortedImportPaths = generateSortedImportPaths(config.files);
+  Object.keys(sortedImportPaths).forEach(targetDirectory => {
+    const filePath = path.resolve(workspace, targetDirectory, 'index.js');
+    try {
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+      }
+    } catch (e) {
+      throw Error(e);
+    }
+  });
 };
 
 
