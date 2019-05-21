@@ -53,13 +53,13 @@ function generateIndexFiles (dictionary, config) {
     .filter(f => !f.includes(mainFilePattern));
 
   // Reduce destination files to a dictionary of arrays, with each key corresponding to an output format.
+
   const sortedImportPaths = destinationFiles.reduce((acc, curr) => {
     const { fileExt, targetDirectory, importPath } = analyseDestinationPath(curr);
-    if (acc[targetDirectory]) {
-      acc[targetDirectory].importPaths.push(importPath);
-    } else {
-      acc[targetDirectory] = { fileExt, importPaths: [importPath] };
+    if (!acc[targetDirectory]) {
+      acc[targetDirectory] = { fileExt, importPaths: [] };
     }
+    acc[targetDirectory].importPaths.push(importPath);
     return acc;
   }, {});
 
