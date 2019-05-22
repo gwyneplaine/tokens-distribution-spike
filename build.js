@@ -111,7 +111,7 @@ const config = {
 // START THE BUILD
 function build() {
   const StyleDictionary = StyleDictionaryPackage.extend(config);
-  
+
   actions.forEach(function (action) {
     StyleDictionary.registerAction(action);
   });
@@ -124,8 +124,11 @@ function build() {
   customFormats.forEach(function(format) {
     StyleDictionary.registerFormat(format);
   });
-
-  StyleDictionary.cleanAllPlatforms();
+  try {
+    StyleDictionary.cleanAllPlatforms();
+  } catch (e) {
+    console.error(e);
+  }
   StyleDictionary.buildAllPlatforms();
 }
 
