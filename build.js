@@ -109,38 +109,23 @@ const config = {
 };
 
 // START THE BUILD
-function clean () {
-  try {
-    const files = globby.sync(path.resolve(__dirname, './packages/**'), { ignore: ['**/package.json', '**/CHANGELOG.md', '**/README.md']});
-    files.forEach(f => {
-      fs.unlinkSync(f);
-    });
-  } catch (e) {
-    throw new Error(e);
-  }
-}
-
 function build() {
-  clean();
-
   const StyleDictionary = StyleDictionaryPackage.extend(config);
+  
   actions.forEach(function (action) {
     StyleDictionary.registerAction(action);
   });
-
   transforms.forEach(function(transform) {
     StyleDictionary.registerTransform(transform);
-  })
-
+  });
   transformGroups.forEach(function(group) {
     StyleDictionary.registerTransformGroup(group);
-  })
-
+  });
   customFormats.forEach(function(format) {
     StyleDictionary.registerFormat(format);
   });
 
-  // StyleDictionary.cleanAllPlatforms();
+  StyleDictionary.cleanAllPlatforms();
   StyleDictionary.buildAllPlatforms();
 }
 

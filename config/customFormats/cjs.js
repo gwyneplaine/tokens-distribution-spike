@@ -1,5 +1,4 @@
 module.exports = (dictionary, config) => {
-
   const reduceValue = (object) => {
     const properties = Object.keys(object);
     if (!properties) return;
