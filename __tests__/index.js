@@ -29,5 +29,4 @@ describe('on yarn build', () => {
     { pattern: './packages/design-tokens-js/src/*.js', name: 'js' },
     { pattern: './packages/design-tokens-json/*/*', name: 'json' },
   ]);
-
 })

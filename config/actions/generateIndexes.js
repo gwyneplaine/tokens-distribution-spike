@@ -68,7 +68,7 @@ function generateIndexFiles (dictionary, config) {
   const references = prepareFiles(sortedImportPaths, buildPath).filter(i => i.file);
   references.forEach(ref => {
     try {
-      fs.writeFileSync(path.resolve(__dirname, ref.targetPath), ref.file);
+      fs.writeFileSync(ref.targetPath, ref.file);
     } catch (e) {
       throw new Error(e);
     }
@@ -91,8 +91,6 @@ function removeIndexFiles (dictionary, config) {
     }
   });
 };
-
-
 
 module.exports = {
   name: 'generate_index_files',
