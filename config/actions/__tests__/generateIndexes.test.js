@@ -76,7 +76,7 @@ describe('generateIndexes.js', () => {
     });
   });
   describe('removeIndexFiles', () => {
-    it('', () => {
+    it('Removes generated index files', () => {
       const dictionary = {};
       const config = {
         buildPath: './config/actions',
