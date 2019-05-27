@@ -9,15 +9,13 @@ const mainFilePattern = 'index.';
 // for the amount of formats we have at the moment.
 
 function createReferences (fileExt, importPaths) {
-  switch (fileExt) {
-    case 'js':
-      return importPaths.map(p => `export * from './${p}';`).join('\n');
-    case 'scss':
-    case 'less':
-      return importPaths.map(p => `@import './${p}';`).join('\n');
-    default:
-      return undefined;
+  if (fileExt === 'js') {
+    return importPaths.map(p => `export * from './${p}';`).join('\n');
   }
+  if (['scss', 'less'].includes(fileExt)) {
+    return importPaths.map(p => `@import './${p}';`).join('\n');
+  }
+ return undefined;
 };
 
 // prepareFiles takes a dictionary of filePaths and returns an array of objects with:
