@@ -18,7 +18,12 @@ Each output format is built into a publishable package such that consumers can:
 ```
 import colors from '@dstokens/design-tokens-css/colors';
 ```
-
+## Contributing 
+After making your commits on a new branch, run from the root folder:
+```
+bolt changeset
+```
+Select the package(s) your work will output changes to. Commit and PR the changeset file with your changes.
 
 ## Adding a new format:
 
