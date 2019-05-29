@@ -1,0 +1,1 @@
+Fix index files to export references to other output files, and not redeclare tokens

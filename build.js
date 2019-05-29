@@ -61,12 +61,13 @@ const config = {
     web: {
       transformGroup: "custom",
       buildPath: buildPath,
+      actions: ['generate_index_files'],
       files: createFiles('web')
     },
     javascript: {
       transformGroup: 'javascript',
       buildPath: buildPath,
-      actions: ['setup_entrypoints'],
+      actions: ['generate_index_files','setup_entrypoints'],
       files: createFiles('javascript'),
     },
     general: {

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateIndexes.js generateIndexFiles() Given js files, it should generate an index.js 1`] = `
+"export * from './colors.js';
+export * from './spacing.js';
+export * from './messaging.js';"
+`;
+
+exports[`generateIndexes.js generateIndexFiles() Given less files, it should generate an index.less 1`] = `
+"@import './colors.less';
+@import './spacing.less';
+@import './messaging.less';"
+`;
+
+exports[`generateIndexes.js generateIndexFiles() Given scss files, it should generate an index.scss 1`] = `
+"@import './colors.scss';
+@import './spacing.scss';
+@import './messaging.scss';"
+`;
