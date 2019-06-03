@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 // TODO: IO PROCEDURES ARE GROSS
+// WE SHOULD REFACTOR TO TURN THIS INTO AN IO FUNCTION
 function deleteDirectory (directoryPath) {
   if (!fs.existsSync(directoryPath)) return;
   const entryPaths = fs.readdirSync(directoryPath);
