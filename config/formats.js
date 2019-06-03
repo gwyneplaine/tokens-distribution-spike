@@ -1,5 +1,5 @@
 const formats = {
-  web: [
+  css: [
     {
       path: 'css/',
       format: 'css/variables',
@@ -23,7 +23,7 @@ const formats = {
       extension: '.js'
     }
   ],
-  general: [
+  json: [
     {
       path: 'json/',
       format: 'json',
