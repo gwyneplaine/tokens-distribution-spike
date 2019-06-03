@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const globby = require('globby');
 const findUp = require('find-up');
-const { deleteDirectory } = require('./utils');
+const { analyseDestinationPath, deleteDirectory } = require('./utils');
 
 function createPkgConfig (filename, fileExt) {
   if (fileExt === 'js') {
@@ -20,9 +20,8 @@ function createPkgConfig (filename, fileExt) {
 
 function getDirectories (files, workspace) {
   return files.reduce((acc, { destination }) => {
-    const [match] = destination.match(/\.[0-9a-z]+$/i);
-    const fileExt = match.substring(1);
-    const [targetDirectory] = destination.match(/.+?(?=\/src\/[0-9a-z]+\.[0-9a-z]+$)/i);
+    const { fileExt, directoryPath } = analyseDestinationPath(destination);
+    const targetDirectory = directoryPath.replace('/src', '');
     const targetPath = path.resolve(__dirname, workspace, targetDirectory);
     if (!acc.find(target => target.targetPath === targetPath)) {
       acc.push({ targetPath, fileExt });
@@ -56,15 +55,20 @@ function removeEntrypoints (dictionary, config) {
   const destinationPath = path.resolve(__dirname, workspace, 'design-tokens-js');
   const directories = getDirectories(config.files, workspace);
   // FILE IO
-  directories.forEach(({ fileExt, targetPath }) => {
-    const directories = fs.readdirSync(targetPath)
-      .map(filePath => path.resolve(targetPath, filePath))
-      .filter(filePath => {
-        return filePath !== path.resolve(targetPath, 'package.json')
-        && filePath !== path.resolve(targetPath, 'CHANGELOG.md');
-      });
-    directories.forEach(deleteDirectory);
-  });
+  try {
+    directories.forEach(({ fileExt, targetPath }) => {
+      const directories = fs.readdirSync(targetPath)
+        .map(filePath => path.resolve(targetPath, filePath))
+        .filter(filePath => {
+          return filePath !== path.resolve(targetPath, 'package.json')
+          && filePath !== path.resolve(targetPath, 'CHANGELOG.md');
+        });
+      directories.forEach(deleteDirectory);
+    });
+  } catch (e) {
+    console.error(e);
+  }
+
 
 }
 

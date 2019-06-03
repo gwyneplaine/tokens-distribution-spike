@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+// TODO: IO PROCEDURES ARE GROSS
 function deleteDirectory (directoryPath) {
   if (!fs.existsSync(directoryPath)) return;
   const entryPaths = fs.readdirSync(directoryPath);
@@ -14,6 +15,16 @@ function deleteDirectory (directoryPath) {
   fs.rmdirSync(directoryPath);
 }
 
+function analyseDestinationPath(filePath) {
+  const [match] = filePath.match(/\.[0-9a-z]+$/i);
+  const fileExt = match.substring(1);
+  const filename = filePath.split('/').pop();
+  const [directoryPath] = filePath.match(/.+?(?=\/[0-9a-z]+\.[0-9a-z]+$)/i);
+
+  return { fileExt, directoryPath, filename };
+}
+
 module.exports = {
-  deleteDirectory,
+  analyseDestinationPath,
+  deleteDirectory
 }

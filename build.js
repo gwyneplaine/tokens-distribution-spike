@@ -37,7 +37,7 @@ function createFiles(platform) {
 
   // then, for each category, output a file in each format
   Object.keys(properties).forEach(function(category) {
-    let filter = (prop) => prop.attributes.category == category;
+    let filter = (prop) => prop.attributes.category === category;
 
     formats[platform].forEach(function(format) {
       files.push(createFile(format, category, filter))

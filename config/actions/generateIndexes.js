@@ -1,6 +1,7 @@
 const fs = require('fs');
 const findUp = require('find-up');
 const path = require('path');
+const { analyseDestinationPath } = require('./utils');
 const mainFilePattern = 'index.';
 
 // This might be better as a map over dictionary of tagged template fns
@@ -34,25 +35,16 @@ function prepareFiles(srcFiles, buildPath) {
   });
 };
 
-function analyseDestinationPath(filePath) {
-  const [match] = filePath.match(/\.[0-9a-z]+$/i);
-  const fileExt = match.substring(1);
-  const importPath = filePath.split('/').pop();
-  const targetDirectory = filePath.match(/.+?(?=\/[0-9a-z]+\.[0-9a-z]+$)/i);
-
-  return { fileExt, targetDirectory, importPath };
-}
-
 function generateSortedImportPaths (filePaths) {
   return filePaths
     .map(f => f.destination)
     .filter(f => !f.includes(mainFilePattern))
     .reduce((acc, curr) => {
-    const { fileExt, targetDirectory, importPath } = analyseDestinationPath(curr);
-    if (!acc[targetDirectory]) {
-      acc[targetDirectory] = { fileExt, importPaths: [] };
+    const { fileExt, directoryPath, filename } = analyseDestinationPath(curr);
+    if (!acc[directoryPath]) {
+      acc[directoryPath] = { fileExt, importPaths: [] };
     }
-    acc[targetDirectory].importPaths.push(importPath);
+    acc[directoryPath].importPaths.push(filename);
     return acc;
   }, {});
 }
@@ -74,7 +66,6 @@ function generateIndexFiles (dictionary, config) {
 };
 
 function removeIndexFiles (dictionary, config) {
-  // TODO, VALIDATE WHETHER OR NOT WE NEED THIS.
   const workspace = findUp.sync(config.buildPath, { type: 'directory' });
 
   const sortedImportPaths = generateSortedImportPaths(config.files);
