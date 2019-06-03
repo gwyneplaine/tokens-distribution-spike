@@ -6,10 +6,10 @@ const cases = require('jest-in-case');
 const { do: generateIndexes, undo: removeIndexes } = require('../generateIndexes');
 describe('generateIndexes.js', () => {
   beforeEach(() => {
-    fs.mkdirSync(path.resolve(__dirname, '../__mocks__'));
+    fs.mkdirSync(path.resolve(__dirname, '../__mock-generateIndexes__'));
   });
   afterEach(() => {
-    const directoryPath = path.resolve(__dirname, '../__mocks__');
+    const directoryPath = path.resolve(__dirname, '../__mock-generateIndexes__');
     const files = globby.sync(directoryPath)
     files.forEach(f => {
       fs.unlinkSync(f);
@@ -23,13 +23,13 @@ describe('generateIndexes.js', () => {
       const config = {
         buildPath: './config/actions',
         files: [
-          { destination: `__mocks__/colors.${fileExt}` },
-          { destination: `__mocks__/spacing.${fileExt}` },
-          { destination: `__mocks__/messaging.${fileExt}` },
+          { destination: `__mock-generateIndexes__/colors.${fileExt}` },
+          { destination: `__mock-generateIndexes__/spacing.${fileExt}` },
+          { destination: `__mock-generateIndexes__/messaging.${fileExt}` },
         ]
       }
       generateIndexes(dictionary, config);
-      const filePath = path.resolve(__dirname, `../__mocks__/index.${fileExt}`);
+      const filePath = path.resolve(__dirname, `../__mock-generateIndexes__/index.${fileExt}`);
       expect(fs.existsSync(filePath));
       const result = fs.readFileSync(filePath).toString();
       expect(result).toMatchSnapshot();
@@ -44,17 +44,17 @@ describe('generateIndexes.js', () => {
         const config = {
           buildPath: './config/actions',
           files: [
-            { destination: '__mocks__/colors.scss' },
-            { destination: '__mocks__/spacing.less' },
-            { destination: '__mocks__/messaging.js' },
+            { destination: '__mock-generateIndexes__/colors.scss' },
+            { destination: '__mock-generateIndexes__/spacing.less' },
+            { destination: '__mock-generateIndexes__/messaging.js' },
           ]
         }
         generateIndexes(dictionary, config);
-        const directoryPath = '__mocks__/generateIndexes';
+        const directoryPath = '__mock-generateIndexes__/generateIndexes';
         const files = globby.sync(directoryPath);
-        expect(files.includes(path.resolve(__dirname,'../__mocks__/index.js')));
-        expect(files.includes(path.resolve(__dirname,'../__mocks__/index.less')));
-        expect(files.includes(path.resolve(__dirname,'../__mocks__/index.scss')));
+        expect(files.includes(path.resolve(__dirname,'../__mock-generateIndexes__/index.js')));
+        expect(files.includes(path.resolve(__dirname,'../__mock-generateIndexes__/index.less')));
+        expect(files.includes(path.resolve(__dirname,'../__mock-generateIndexes__/index.scss')));
       });
     })
 
@@ -64,13 +64,13 @@ describe('generateIndexes.js', () => {
         const config = {
           buildPath: './config/actions',
           files: [
-            { destination: `__mocks__/colors.fakeFormat` },
-            { destination: `__mocks__/spacing.fakeFormat` },
-            { destination: `__mocks__/messaging.fakeFormat` },
+            { destination: `__mock-generateIndexes__/colors.fakeFormat` },
+            { destination: `__mock-generateIndexes__/spacing.fakeFormat` },
+            { destination: `__mock-generateIndexes__/messaging.fakeFormat` },
           ]
         }
         generateIndexes(dictionary,config);
-        const filePath = path.resolve(__dirname, '../__mocks__/');
+        const filePath = path.resolve(__dirname, '../__mock-generateIndexes__/');
         expect(globby.sync(filePath)).toEqual([]);
       });
     });
@@ -81,11 +81,11 @@ describe('generateIndexes.js', () => {
       const config = {
         buildPath: './config/actions',
         files: [
-          { destination: `__mocks__/colors.js` },
+          { destination: `__mock-generateIndexes__/colors.js` },
         ],
       };
       generateIndexes(dictionary,config);
-      const filePath = path.resolve(__dirname, '../__mocks__/index.js');
+      const filePath = path.resolve(__dirname, '../__mock-generateIndexes__/index.js');
       expect(fs.existsSync(filePath)).toBe(true);
       removeIndexes(dictionary, config);
       expect(fs.existsSync(filePath)).not.toBe(true);

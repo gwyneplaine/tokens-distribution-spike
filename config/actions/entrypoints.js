@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const globby = require('globby');
 const findUp = require('find-up');
+const { deleteDirectory } = require('./utils');
 
 function createPkgConfig (filename, fileExt) {
   if (fileExt === 'js') {
@@ -18,11 +19,10 @@ function createPkgConfig (filename, fileExt) {
 };
 
 function getDirectories (files, workspace) {
-  console.log(files);
   return files.reduce((acc, { destination }) => {
     const [match] = destination.match(/\.[0-9a-z]+$/i);
     const fileExt = match.substring(1);
-    const targetDirectory = destination.split('/').shift();
+    const [targetDirectory] = destination.match(/.+?(?=\/src\/[0-9a-z]+\.[0-9a-z]+$)/i);
     const targetPath = path.resolve(__dirname, workspace, targetDirectory);
     if (!acc.find(target => target.targetPath === targetPath)) {
       acc.push({ targetPath, fileExt });
@@ -44,38 +44,28 @@ function setupEntrypoints (dictionary, config) {
   directories.forEach(({ fileExt, targetPath }) => {
     propertyKeys.forEach(fileName => {
       const data = createPkgConfig(fileName, fileExt);
-      execSync(`mkdir ${targetPath}/${fileName}`);
+      execSync(`mkdir -p ${targetPath}/${fileName}`);
       fs.writeFileSync(`${targetPath}/${fileName}/package.json`, JSON.stringify(data, null, 2));
     });
   });
-}
-
-function deleteDirectory (directoryPath) {
-  if (!fs.existsSync(directoryPath)) return;
-  const entryPaths = fs.readdirSync(directoryPath);
-  entryPaths.forEach(entryPath => {
-    const resolvedPath = path.resolve(directoryPath, entryPath);
-    if (fs.lstatSync(resolvedPath).isDirectory()) {
-      deleteDirectory(resolvedPath);
-    } else {
-      fs.unlinkSync(resolvedPath);
-    };
-  });
-  fs.rmdirSync(directoryPath);
 }
 
 function removeEntrypoints (dictionary, config) {
   const propertyKeys = Object.keys(dictionary.properties);
   const workspace = findUp.sync(config.buildPath, { type: 'directory' });
   const destinationPath = path.resolve(__dirname, workspace, 'design-tokens-js');
+  const directories = getDirectories(config.files, workspace);
   // FILE IO
-  const directories = fs.readdirSync(destinationPath)
-    .map(filePath => path.resolve(destinationPath, filePath))
-    .filter(filePath => {
-      return filePath !== path.resolve(destinationPath, 'package.json')
-      && filePath !== path.resolve(destinationPath, 'CHANGELOG.md');
-    });
-  directories.forEach(deleteDirectory);
+  directories.forEach(({ fileExt, targetPath }) => {
+    const directories = fs.readdirSync(targetPath)
+      .map(filePath => path.resolve(targetPath, filePath))
+      .filter(filePath => {
+        return filePath !== path.resolve(targetPath, 'package.json')
+        && filePath !== path.resolve(targetPath, 'CHANGELOG.md');
+      });
+    directories.forEach(deleteDirectory);
+  });
+
 }
 
 module.exports = {
