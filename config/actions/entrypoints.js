@@ -20,7 +20,7 @@ function setupEntrypoints (dictionary, config) {
   });
 }
 
-function removeEntrypoints () {
+function removeEntrypoints (dictionary, config) {
   const propertyKeys = Object.keys(dictionary.properties);
   const destinationPath = path.resolve(__dirname, `..${config.buildPath}/design-tokens-js`);
   propertyKeys.forEach(key => {
