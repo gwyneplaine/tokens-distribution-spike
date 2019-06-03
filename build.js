@@ -35,8 +35,6 @@ function createFiles(platform) {
   // first do a rollup of all tokens
   let files = formats[platform].map((format) => createFile(format, 'index'));
 
-  // console.log(files);
-
   // then, for each category, output a file in each format
   Object.keys(properties).forEach(function(category) {
     let filter = (prop) => prop.attributes.category == category;
