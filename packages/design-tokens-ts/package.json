@@ -1,8 +1,9 @@
 {
   "name": "@dstokens/design-tokens-ts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "dist/design-tokens-ts.cjs.js",
   "module": "dist/design-tokens-ts.esm.js",
+  "types": "dist/design-tokens-ts.d.ts",
   "license": "ISC",
   "author": "Atlassian",
   "preconstruct": {
@@ -14,6 +15,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.3.3"
+    "@babel/core": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "typescript": "^3.5.1"
   }
 }
