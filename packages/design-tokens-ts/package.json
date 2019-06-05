@@ -1,9 +1,8 @@
 {
   "name": "@dstokens/design-tokens-ts",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "dist/design-tokens-ts.cjs.js",
   "module": "dist/design-tokens-ts.esm.js",
-  "types": "dist/design-tokens-ts.d.ts",
   "license": "ISC",
   "author": "Atlassian",
   "preconstruct": {
