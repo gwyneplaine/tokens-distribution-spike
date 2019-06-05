@@ -63,6 +63,7 @@ function removeEntrypoints (dictionary, config) {
         return filePath !== path.resolve(targetPath, 'package.json')
         && filePath !== path.resolve(targetPath, 'CHANGELOG.md')
         && filePath !== path.resolve(targetPath, '.babelrc')
+        && filePath !== path.resolve(targetPath, 'tsconfig.json')
       });
     directories.forEach(deleteDirectory);
   });
