@@ -63,6 +63,12 @@ const config = {
       actions: ['generate_index_files','setup_entrypoints'],
       files: createFiles('javascript'),
     },
+    typescript: {
+      transformGroup: 'typescript',
+      buildPath: buildPath,
+      actions: ['generate_index_files', 'setup_entrypoints'],
+      files: createFiles('typescript'),
+    },
     json: {
       transformGroup: "custom",
       buildPath: buildPath,

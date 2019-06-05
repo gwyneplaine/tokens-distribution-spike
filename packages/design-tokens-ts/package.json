@@ -1,0 +1,15 @@
+{
+  "name": "@gwyneplaine/design-tokens-ts",
+  "version": "0.0.0",
+  "main": "dist/design-tokens-ts.cjs.js",
+  "module": "dist/design-tokens-ts.esm.js",
+  "license": "ISC",
+  "author": "Atlassian"
+  "preconstruct": {
+    "entrypoints": [
+      ".",
+      "color",
+      "spacing"
+    ]
+  }
+}
