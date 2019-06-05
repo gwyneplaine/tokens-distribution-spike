@@ -64,7 +64,7 @@ const config = {
       files: createFiles('javascript'),
     },
     typescript: {
-      transformGroup: 'typescript',
+      transformGroup: 'javascript',
       buildPath: buildPath,
       actions: ['generate_index_files', 'setup_entrypoints'],
       files: createFiles('typescript'),
