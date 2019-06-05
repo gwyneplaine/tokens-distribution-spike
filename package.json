@@ -1,8 +1,9 @@
 {
-  "name": "@gwyneplaine/design-tokens",
+  "name": "@dstokens/design-tokens",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "ISC",
+  "author": "Atlassian",
   "scripts": {
     "build": "node ./build.js && preconstruct build",
     "changeset": "changeset add",
@@ -12,6 +13,7 @@
     "add:package": "node ./add-pkg.js"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^7.3.3",
     "@changesets/cli": "^1.1.1",
     "chalk": "^2.4.2",
     "find-up": "^4.0.0",
@@ -34,7 +36,8 @@
   },
   "preconstruct": {
     "packages": [
-      "packages/design-tokens-js"
+      "packages/design-tokens-js",
+      "packages/design-tokens-ts"
     ]
   }
 }
