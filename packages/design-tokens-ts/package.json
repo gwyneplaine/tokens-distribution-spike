@@ -1,15 +1,19 @@
 {
-  "name": "@gwyneplaine/design-tokens-ts",
+  "name": "@dstokens/design-tokens-ts",
   "version": "0.0.0",
   "main": "dist/design-tokens-ts.cjs.js",
   "module": "dist/design-tokens-ts.esm.js",
   "license": "ISC",
-  "author": "Atlassian"
+  "author": "Atlassian",
   "preconstruct": {
     "entrypoints": [
       ".",
       "color",
-      "spacing"
+      "spacing",
+      "layers"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.3.3"
   }
 }
