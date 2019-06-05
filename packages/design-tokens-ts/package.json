@@ -1,6 +1,6 @@
 {
   "name": "@dstokens/design-tokens-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/design-tokens-ts.cjs.js",
   "module": "dist/design-tokens-ts.esm.js",
   "license": "ISC",
