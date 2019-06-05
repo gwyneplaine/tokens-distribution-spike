@@ -1,5 +1,14 @@
 # @gwyneplaine/design-tokens-css
 
+## 0.4.1
+### Patch Changes
+
+- [patch] 1188021:
+
+  Fix index files to export references to other output files, and not redeclare tokens- [patch] 87f3f90:
+
+  Fix bug in clean script, messaging tokens now properly removed
+
 ## 0.4.0
 ### Minor Changes
 
