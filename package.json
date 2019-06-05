@@ -20,7 +20,8 @@
     "inquirer": "^6.3.1",
     "jest-in-case": "^1.0.2",
     "lodash": "^4.17.11",
-    "style-dictionary": "^2.7.0"
+    "style-dictionary": "^2.7.0",
+    "typescript": "^3.5.1"
   },
   "private": true,
   "bolt": {
@@ -29,9 +30,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
     "globby": "^9.2.0",
     "jest": "^24.7.1",
-    "preconstruct": "^0.0.54",
+    "preconstruct": "^0.0.79",
     "rimraf": "^2.6.3"
   },
   "preconstruct": {
