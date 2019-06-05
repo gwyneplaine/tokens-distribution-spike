@@ -16,13 +16,6 @@ const formats = {
       extension: '.scss'
     },
   ],
-  javascript: [
-    {
-      path: 'js/src/',
-      format: 'javascript/es6',
-      extension: '.js'
-    }
-  ],
   typescript: [
     {
       path: 'ts/src/',
