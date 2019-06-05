@@ -10,7 +10,8 @@
     "entrypoints": [
       ".",
       "color",
-      "spacing"
+      "spacing",
+      "layers"
     ]
   }
 }
