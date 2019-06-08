@@ -23,6 +23,13 @@ const formats = {
       extension: '.js'
     }
   ],
+  typescript: [
+    {
+      path: 'ts/src/',
+      format: 'javascript/es6',
+      extension: '.ts',
+    }
+  ],
   json: [
     {
       path: 'json/',

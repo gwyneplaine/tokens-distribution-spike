@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 
 
 async function run () {
-  const namespace = "@gwyneplaine";
+  const namespace = "@dstokens";
 
   const pkgName = await inquirer.prompt([{
     message: "First, what is the name of your new package?",

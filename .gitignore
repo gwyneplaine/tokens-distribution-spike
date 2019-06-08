@@ -3,5 +3,7 @@ node_modules/
 
 packages/*/*
 
+!packages/*/.babelrc
+!packages/*/tsconfig.json
 !packages/*/package.json
 !packages/*/CHANGELOG.md

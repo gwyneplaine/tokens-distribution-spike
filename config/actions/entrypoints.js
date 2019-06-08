@@ -5,11 +5,11 @@ const globby = require('globby');
 const findUp = require('find-up');
 const { analyseDestinationPath, deleteDirectory } = require('./utils');
 
-function createPkgConfig (filename, fileExt) {
-  if (fileExt === 'js') {
+function createPkgConfig (filename, fileExt, pkgName) {
+  if (fileExt === 'js' || fileExt === 'ts') {
     return {
-      main: 'dist/design-tokens-js.cjs.js',
-      module: 'dist/design-tokens-js.esm.js',
+      main: `dist/${pkgName}.cjs.js`,
+      module: `dist/${pkgName}.esm.js`,
       preconstruct: {
         source: `../src/${filename}`,
       }
@@ -24,7 +24,7 @@ function getDirectories (files, workspace) {
     const targetDirectory = directoryPath.replace('/src', '');
     const targetPath = path.resolve(__dirname, workspace, targetDirectory);
     if (!acc.find(target => target.targetPath === targetPath)) {
-      acc.push({ targetPath, fileExt });
+      acc.push({ targetPath, fileExt, pkgName: targetDirectory });
     }
     return acc;
   }, []);
@@ -40,9 +40,9 @@ function setupEntrypoints (dictionary, config) {
   const directories = getDirectories(config.files, workspace);
 
   // FILE IO
-  directories.forEach(({ fileExt, targetPath }) => {
+  directories.forEach(({ fileExt, targetPath, pkgName }) => {
     propertyKeys.forEach(fileName => {
-      const data = createPkgConfig(fileName, fileExt);
+      const data = createPkgConfig(fileName, fileExt, pkgName);
       execSync(`mkdir -p ${targetPath}/${fileName}`);
       fs.writeFileSync(`${targetPath}/${fileName}/package.json`, JSON.stringify(data, null, 2));
     });
@@ -55,21 +55,18 @@ function removeEntrypoints (dictionary, config) {
   const destinationPath = path.resolve(__dirname, workspace, 'design-tokens-js');
   const directories = getDirectories(config.files, workspace);
   // FILE IO
-  try {
-    directories.forEach(({ fileExt, targetPath }) => {
-      const directories = fs.readdirSync(targetPath)
-        .map(filePath => path.resolve(targetPath, filePath))
-        .filter(filePath => {
-          return filePath !== path.resolve(targetPath, 'package.json')
-          && filePath !== path.resolve(targetPath, 'CHANGELOG.md');
-        });
-      directories.forEach(deleteDirectory);
-    });
-  } catch (e) {
-    console.error(e);
-  }
 
-
+  directories.forEach(({ fileExt, targetPath }) => {
+    const directories = fs.readdirSync(targetPath)
+      .map(filePath => path.resolve(targetPath, filePath))
+      .filter(filePath => {
+        return filePath !== path.resolve(targetPath, 'package.json')
+        && filePath !== path.resolve(targetPath, 'CHANGELOG.md')
+        && filePath !== path.resolve(targetPath, '.babelrc')
+        && filePath !== path.resolve(targetPath, 'tsconfig.json')
+      });
+    directories.forEach(deleteDirectory);
+  });
 }
 
 module.exports = {

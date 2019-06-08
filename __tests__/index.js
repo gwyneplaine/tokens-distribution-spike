@@ -28,5 +28,6 @@ describe('on yarn build', () => {
     { pattern: './packages/design-tokens-less/*.less', name: 'less' },
     { pattern: './packages/design-tokens-js/src/*.js', name: 'js' },
     { pattern: './packages/design-tokens-json/*/*', name: 'json' },
+    { pattern: './packages/design-tokens-ts/src/*.ts', name: 'ts' },
   ]);
 })
