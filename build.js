@@ -57,12 +57,6 @@ const config = {
       actions: ['generate_index_files'],
       files: createFiles('css')
     },
-    javascript: {
-      transformGroup: 'javascript',
-      buildPath: buildPath,
-      actions: ['generate_index_files','setup_entrypoints'],
-      files: createFiles('javascript'),
-    },
     typescript: {
       transformGroup: 'javascript',
       buildPath: buildPath,
